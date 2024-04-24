@@ -3,6 +3,8 @@ PREPROCESSING:
 The code performing this is designed to preprocess a dataset stored in a JSON file. It begins by importing necessary libraries such as pandas for data manipulation and json for handling JSON files. The script then reads data from a specific JSON file location and parses each line into a Python dictionary, storing these dictionaries in a list.
 Subsequently, the list of dictionaries is converted into a pandas DataFrame, facilitating easier data manipulation. Irrelevant columns are dropped from the DataFrame, and rows containing missing values are removed. The 'price' column undergoes cleaning, where dollar signs and hyphens are removed, and the values are converted into numeric format.
 Finally, the preprocessed DataFrame is saved into a new JSON file named 'preprocessed_final1.json', ready for further analysis or use. Overall, the script streamlines data preparation tasks, ensuring the dataset is cleaned and structured appropriately for downstream analysis or modeling.
+
+
 PRODUCER : 
 This Python code is designed to facilitate the transfer of preprocessed data from a JSON file into a Kafka topic. It begins by importing necessary libraries, including json, time, and KafkaProducer from the kafka library. The KafkaProducer instance is initialized with the specified bootstrap server.
 Next, key variables are defined, including the Kafka topic name ('assignment-topic') and the chunk size, which determines the number of records to be read from the JSON file at each iteration.
@@ -10,6 +12,8 @@ The script then enters a loop to read data from the JSON file in chunks. Within 
 After publishing all data from the file, the producer is flushed to ensure all pending messages are sent, and then it's closed to release resources.
 In essence, this script provides a streamlined mechanism for transferring preprocessed data from a JSON file to a Kafka topic, enabling seamless integration into Kafka-based data pipelines or systems.
 CONSUMERS : 
+
+
 This Python code sets up a KafkaConsumer to receive messages from a Kafka topic named 'assignment-topic'. It's designed to perform real-time analysis on these messages using the Apriori algorithm, which extracts frequent itemsets and generates association rules.
 Initially, the script defines parameters such as the minimum support and confidence thresholds to filter out less significant itemsets and rules. It then initializes data structures to store frequent itemsets and counts, along with a counter for total transactions processed.
 The core of the script lies in the generation of frequent itemsets and association rules. For each incoming message, the script decodes and parses it, treating it as a transaction. It incrementally updates the counts of itemsets based on the transaction data and prunes infrequent itemsets according to the minimum support threshold.
